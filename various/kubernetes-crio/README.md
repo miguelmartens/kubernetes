@@ -2,6 +2,14 @@
 
 Follow this documentation to provision a single node Kubernetes cluster with kubeadm on __Ubuntu 20.04 LTS__ with __cri-o__ as the container runtime.
 
+
+```
+sudo su -
+
+apt update && apt upgrade -y
+```
+
+
 ##### Disable swap and firewall
 ```
 {
