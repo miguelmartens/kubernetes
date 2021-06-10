@@ -2,8 +2,6 @@
 
 Follow this documentation to provision a single node Kubernetes cluster with kubeadm on __Ubuntu 20.04 LTS__ with __cri-o__ as the container runtime.
 
-## On all kubernetes nodes (kmaster & kworker1)
-
 ##### Disable swap and firewall
 ```
 {
@@ -85,8 +83,6 @@ apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 apt install -qq -y kubeadm=1.21.0-00 kubelet=1.21.0-00 kubectl=1.21.0-00
 }
 ```
-
-## On the master node (kmaster)
 
 ##### Initialize kubernetes cluster
 ```
