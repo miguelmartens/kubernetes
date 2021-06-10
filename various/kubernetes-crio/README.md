@@ -119,9 +119,14 @@ mkdir ~/.kube
 scp root@192.168.50.100:/etc/kubernetes/admin.conf ~/.kube/config
 ```
 
-## Verifying the cluster
+### Verifying the cluster
 ```
 kubectl cluster-info
 kubectl get nodes
 kubectl get pods -A
+```
+
+### Scheduling Pods on the control-plane node
+```
+kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
