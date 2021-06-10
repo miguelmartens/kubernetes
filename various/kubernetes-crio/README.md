@@ -89,6 +89,16 @@ apt install -qq -y kubeadm=1.21.0-00 kubelet=1.21.0-00 kubectl=1.21.0-00
 kubeadm init --apiserver-advertise-address=192.168.50.100 --pod-network-cidr=192.168.0.0/16
 ```
 
+##### Timeout issue
+```
+# more info at https://github.com/cri-o/cri-o/blob/master/tutorials/kubeadm.md
+KUBELET_EXTRA_ARGS="--feature-gates=\"AllAlpha=false,RunAsGroup=true\" --container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint='unix:///var/run/crio/crio.sock' --runtime-request-timeout=5m"
+# add Kublet extra args to /etc/default/kubelet if not there
+grep -qxF "KUBELET_EXTRA_ARGS=${KUBELET_EXTRA_ARGS}" /etc/default/kubelet \
+|| echo "KUBELET_EXTRA_ARGS=${KUBELET_EXTRA_ARGS}" \
+| sudo tee /etc/default/kubelet
+```
+
 ##### Deploy network add on - Calico
 ```
 kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectcalico.org/manifests/calico.yaml
