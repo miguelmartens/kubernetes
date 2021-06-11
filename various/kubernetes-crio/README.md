@@ -9,6 +9,10 @@ sudo su -
 apt update && apt upgrade -y
 ```
 
+```
+apt install wpasupplicant
+vim /etc/netplan/00..
+```
 
 ##### Disable swap and firewall
 ```
