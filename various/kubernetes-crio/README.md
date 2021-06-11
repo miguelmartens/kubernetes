@@ -130,3 +130,9 @@ kubectl get pods -A
 ```
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
+
+```
+wget https://raw.githubusercontent.com/miguelmartens/kubernetes/main/various/kubernetes-crio/crio.conf -P /etc/crio/crio.conf
+systemctl restart crio
+crictl ps
+```
