@@ -24,7 +24,7 @@ systemctl disable --now ufw
 ##### Update /etc/hosts
 ```
 cat >>/etc/hosts<<EOF
-192.168.50.1   k8s.cryocore.io     cryocore
+192.168.50.100   k8s.cryocore.io     cryocore
 EOF
 ```
 
