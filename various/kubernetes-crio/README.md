@@ -140,3 +140,23 @@ wget https://raw.githubusercontent.com/miguelmartens/kubernetes/main/various/kub
 systemctl restart crio
 crictl ps
 ```
+
+```
+wget https://github.com/projectcalico/calico/releases/download/v3.19.1/tigera-operator-v3.19.1-2.tgz
+
+helm install calico tigera-operator-v3.19.1-2.tgz 
+watch kubectl get pods -n calico-system
+
+```
+
+```
+helm repo add metallb https://metallb.github.io/metallb
+helm repo update
+helm install metallb metallb/metallb
+
+kubectl create ns metallb-system
+
+helm install metallb metallb/metallb -f https://raw.githubusercontent.com/miguelmartens/kubernetes/main/various/kubernetes-crio/helm/metallb/values.yaml -n metallb-system
+
+watch kubectl get pods -n metallb-system
+```
