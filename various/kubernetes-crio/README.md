@@ -160,6 +160,12 @@ kubectl create ns metallb-system
 helm install metallb metallb/metallb -f https://raw.githubusercontent.com/miguelmartens/kubernetes/main/various/kubernetes-crio/helm/metallb/values.yaml -n metallb-system
 
 watch kubectl get pods -n metallb-system
+
+kubectl create deploy nginx --image nginx
+kubectl get all
+kubectl expose deploy nginx --port 80 --type LoadBalancer
+kubectl get svc
+
 ```
 
 ```
@@ -178,4 +184,15 @@ kubectl edit svc longhorn-frontend -n longhorn-system
 
 ```
 helm show values
+```
+```
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+helm repo list
+helm search repo traefik
+helm show values traefik/traefik
+
+kubectl create ns traefik-system
+helm install traefik traefik/traefik -f https://raw.githubusercontent.com/miguelmartens/kubernetes/main/various/kubernetes-crio/helm/traefik/values.yaml --namespace traefik-system
+kubectl get all -n traefik-system
 ```
