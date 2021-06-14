@@ -174,3 +174,8 @@ helm install longhorn ./longhorn/chart/ -f https://raw.githubusercontent.com/mig
 
 kubectl edit svc longhorn-frontend -n longhorn-system
 ```
+
+
+```
+helm show values
+```
