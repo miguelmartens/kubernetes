@@ -144,7 +144,8 @@ crictl ps
 ```
 wget https://github.com/projectcalico/calico/releases/download/v3.19.1/tigera-operator-v3.19.1-2.tgz
 
-helm install calico tigera-operator-v3.19.1-2.tgz 
+kubectl create ns calico-system
+helm install --namespace=calico-system calico tigera-operator-v3.19.1-2.tgz 
 watch kubectl get pods -n calico-system
 
 ```
