@@ -145,7 +145,7 @@ crictl ps
 wget https://github.com/projectcalico/calico/releases/download/v3.19.1/tigera-operator-v3.19.1-2.tgz
 
 kubectl create ns calico-system
-helm install --namespace=calico-system calico tigera-operator-v3.19.1-2.tgz 
+helm install calico ./tigera-operator-v3.19.1-2.tgz --namespace calico-system
 watch kubectl get pods -n calico-system
 
 ```
@@ -166,4 +166,11 @@ watch kubectl get pods -n metallb-system
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+```
+kubectl create namespace longhorn-system
+helm install longhorn ./longhorn/chart/ --namespace longhorn-system
+
+kubectl edit svc longhorn-frontend -n longhorn-system
 ```
