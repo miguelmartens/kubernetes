@@ -170,7 +170,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ```
 kubectl create namespace longhorn-system
-helm install longhorn ./longhorn/chart/ --namespace longhorn-system
+helm install longhorn ./longhorn/chart/ -f https://raw.githubusercontent.com/miguelmartens/kubernetes/main/various/kubernetes-crio/helm/longhorn/values.yaml --namespace longhorn-system
 
 kubectl edit svc longhorn-frontend -n longhorn-system
 ```
