@@ -160,3 +160,9 @@ helm install metallb metallb/metallb -f https://raw.githubusercontent.com/miguel
 
 watch kubectl get pods -n metallb-system
 ```
+
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
