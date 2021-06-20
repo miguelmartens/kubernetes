@@ -90,7 +90,7 @@ ingressRoute:
   dashboard:
     enabled: true
     # Additional ingressRoute annotations (e.g. for kubernetes.io/ingress.class)
-    annotations: {}
+    annotations: { traefik.ingress.kubernetes.io/router.tls: "true" }
     # Additional ingressRoute labels (e.g. for filtering IngressRoute by custom labels)
     labels: {}
 
@@ -127,10 +127,7 @@ providers:
 # - "--providers.file.filename=/config/dynamic.toml"
 # - "--ping"
 # - "--ping.entrypoint=web"
-volumes:
-  - name: pebble
-    mountPath: "/certs"
-    type: configMap
+volumes: []
 # - name: public-cert
 #   mountPath: "/certs"
 #   type: secret
@@ -196,17 +193,16 @@ globalArguments:
 # All available options available on https://docs.traefik.io/reference/static-configuration/cli/
 ## Use curly braces to pass values: `helm install --set="additionalArguments={--providers.kubernetesingress.ingressclass=traefik-internal,--log.level=DEBUG}"`
 additionalArguments:
-  - --certificatesresolvers.pebble.acme.tlschallenge=true
-  - --certificatesresolvers.pebble.acme.email=acme@cryocore.io
-  - --certificatesresolvers.pebble.acme.storage=/data/acme.json
-  - --certificatesresolvers.pebble.acme.caserver=https://pebble.traefik-system/dir
+  - "--log.level=INFO"
+  - "--entrypoints.websecure.http.tls"
+  - "--providers.kubernetesIngress.ingressClass=traefik-cert-manager"
+  - "--ping"
+  - "--metrics.prometheus"
 #  - "--providers.kubernetesingress.ingressclass=traefik-internal"
 #  - "--log.level=DEBUG"
 
 # Environment variables to be passed to Traefik's binary
-env:
-  - name: LEGO_CA_CERTIFICATES
-    value: "/certs/root-cert.pem"
+env: []
 # - name: SOME_VAR
 #   value: some-var-value
 # - name: SOME_VAR_FROM_CONFIG_MAP
@@ -269,7 +265,7 @@ ports:
     # Port Redirections
     # Added in 2.2, you can make permanent redirects via entrypoints.
     # https://docs.traefik.io/routing/entrypoints/#redirection
-    # redirectTo: websecure
+    redirectTo: websecure
   websecure:
     port: 8443
     # hostPort: 8443
@@ -348,7 +344,7 @@ autoscaling:
 # - "--certificatesresolvers.le.acme.storage=/data/acme.json"
 # It will persist TLS certificates.
 persistence:
-  enabled: true
+  enabled: false
   name: data
 #  existingClaim: ""
   accessMode: ReadWriteOnce
